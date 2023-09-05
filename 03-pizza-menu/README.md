@@ -985,8 +985,6 @@ root.render(
 // ReactDOM.render(<App />, document.getElementById("root"));
 ```
 
--
-
 <br>
 
 ### 47. Conditional Rendering With &&<a id='47'></a>
@@ -1140,7 +1138,7 @@ root.render(
 
 ### 48. Conditional Rendering With Ternaries<a id='48'></a>
 
-- In src/index.js, in Menu, Footer component
+- In src/index.js, try ternaries to render in Menu, Footer component
 
 ```js
 import React from "react";
@@ -1222,6 +1220,7 @@ function Menu() {
     <main className="menu">
       <h2>Our menu</h2>
 
+      {/* 1️⃣ */}
       {numPizzas > 0 ? (
         <ul className="pizzas">
           {pizzas.map((pizza) => (
@@ -1236,15 +1235,15 @@ function Menu() {
 }
 
 function Pizza(props) {
-  console.log(pizzaObj);
+  console.log(props);
 
   return (
     <li className="pizza">
-      <img src={pizzaObj.photoName} alt={pizzaObj.name} />
+      <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
       <div>
-        <h3>{pizzaObj.name}</h3>
-        <p>{pizzaObj.ingredients}</p>
-        <span>{pizzaObj.price}</span>
+        <h3>{props.pizzaObj.name}</h3>
+        <p>{props.pizzaObj.ingredients}</p>
+        <span>{props.pizzaObj.price}</span>
       </div>
     </li>
   );
@@ -1262,6 +1261,7 @@ function Footer() {
 
   return (
     <footer className="footer">
+      {/* 2️⃣ */}
       {isOpen ? (
         <div className="order">
           <p>We're are open until {closeHour}:00.</p>
