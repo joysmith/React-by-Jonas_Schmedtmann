@@ -1390,17 +1390,18 @@ function Menu() {
 }
 
 function Pizza(props) {
-  console.log(pizzaObj);
+  console.log(props.pizzaObj);
 
-  if (pizzaObj.soldOut) return null;
+  // 1️⃣
+  if (props.pizzaObj.soldOut) return null;
 
   return (
     <li className="pizza">
-      <img src={pizzaObj.photoName} alt={pizzaObj.name} />
+      <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
       <div>
-        <h3>{pizzaObj.name}</h3>
-        <p>{pizzaObj.ingredients}</p>
-        <span>{pizzaObj.price}</span>
+        <h3>{props.pizzaObj.name}</h3>
+        <p>{props.pizzaObj.ingredients}</p>
+        <span>{props.pizzaObj.price}</span>
       </div>
     </li>
   );
