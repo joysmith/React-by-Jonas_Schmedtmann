@@ -284,8 +284,6 @@ root.render(
 // ReactDOM.render(<App />, document.getElementById("root"));
 ```
 
-- ref. [Using toLocaleTimeString()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleTimeString)
-
 <br>
 
 ### 39. JavaScript Logic in Components<a id='39'></a>
@@ -369,7 +367,7 @@ function Menu() {
 function Pizza() {
   return (
     <div>
-      <img src="pizzas/prosciutto" alt="pizza prosciutto" />
+      <img src="pizzas/prosciutto.jpg" alt="pizza prosciutto" />
       <h3>Pizza Prosciutto</h3>
       <p>Tomato, mozarella, ham, aragula, and burrata cheese</p>
     </div>
@@ -386,7 +384,9 @@ function Footer() {
   // if (hour >= openHour && hour <= closeHour) alert("We're currently open!");
   // else alert("Sorry we're closed");
 
-  return <footer>{new Date().toLocaleTimeString}. We/re currently open</footer>;
+  return (
+    <footer>{new Date().toLocaleTimeString()}. We/re currently open</footer>
+  );
 
   // return React.createElement("footer", null, "We're currently open!");
 }
@@ -402,6 +402,8 @@ root.render(
 // React before 18
 // ReactDOM.render(<App />, document.getElementById("root"));
 ```
+
+- ref. [Using toLocaleTimeString()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleTimeString)
 
 <br>
 
