@@ -27,6 +27,8 @@
 
 ```
 npx create-react-app pizza-menu
+cd pizza-menu
+npm start
 ```
 
 - remove src folder
@@ -62,11 +64,11 @@ root.render(
 
 #### Possible solution to deal with react project problem
 
-- 1. check dev-server is running
-- 2. restart dev-server
-- 3. hard reload the chrome browser
-- 4. chrome dev-tool-> console
-- 5. termnal linter error copy and paste to google, look for stack overflow recent year
+1. check dev-server is running
+1. restart dev-server
+1. hard reload the chrome browser
+1. chrome dev-tool-> console
+1. termnal linter error copy and paste to google, look for stack overflow recent year
 
 <br>
 
@@ -80,8 +82,7 @@ root.render(
 - from starter folder copy all resource and paste in project/public folder
 - move index.css file from public to src folder
 - copy from public/data.js data and paste in src/index.js
-- create Pizza reusable component
-- In src/index.js
+- In src/index.js, create Pizza reusable component
 
 ```js
 import React from "react";
@@ -145,7 +146,7 @@ function App() {
 function Pizza() {
   return (
     <div>
-      <img src="pizzas/prosciutto" alt="pizza prosciutto" />
+      <img src="pizzas/prosciutto.jpg" alt="pizza prosciutto" />
       <h3>Pizza Prosciutto</h3>
       <p>Tomato, mozarella, ham, aragula, and burrata cheese</p>
     </div>
