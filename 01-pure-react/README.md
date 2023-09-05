@@ -46,6 +46,8 @@ VS code extension
 - prettier
 - one monokai theme
 - materal icon theme by phillipp kief
+- quokka.js by wallaby.js for running jscode inside vscode
+  - go to cmd palette-> (type) Quokka.js:Start on Current File
 
 ---
 
