@@ -176,6 +176,7 @@ root.render(
 ### 38. Creating More Components<a id='38'></a>
 
 - In src/index.js create simple Header, Menu, Footer component and nest them in App component
+  - also refactor Pizza component into Menu component
 
 ```js
 import React from "react";
@@ -226,6 +227,7 @@ const pizzaData = [
   },
 ];
 
+// 4️⃣
 function App() {
   return (
     <div className="container">
@@ -236,10 +238,12 @@ function App() {
   );
 }
 
+// 1️⃣
 function Header() {
   return <h1>Fast React Pizza Co.</h1>;
 }
 
+// 2️⃣
 function Menu() {
   return (
     <div>
@@ -254,13 +258,14 @@ function Menu() {
 function Pizza() {
   return (
     <div>
-      <img src="pizzas/prosciutto" alt="pizza prosciutto" />
+      <img src="pizzas/prosciutto.jpg" alt="pizza prosciutto" />
       <h3>Pizza Prosciutto</h3>
       <p>Tomato, mozarella, ham, aragula, and burrata cheese</p>
     </div>
   );
 }
 
+// 3️⃣
 function Footer() {
   return <footer>{new Date().toLocaleTimeString} We/re currently open</footer>;
 
