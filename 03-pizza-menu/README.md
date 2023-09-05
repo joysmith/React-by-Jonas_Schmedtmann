@@ -1,52 +1,17 @@
-#### 32. [Section Overview](#32)
-
-#### 33. [Rendering the Root Component and Strict Mode](#33)
-
-#### 34. [Before We Start Coding: Debugging](#34)
-
-#### 35. [Components as Building Blocks](#35)
-
-#### 36. [Creating And Reusing a Component](#36)
-
-#### 37. [What is JSX?](#37)
-
-#### 38. [Creating More Components](#38)
-
-#### 39. [JavaScript Logic in Components](#39)
-
-#### 40. [Separation of Concerns](#40)
-
-#### 41. [Styling React Applications](#41)
-
-#### 42. [Passing and Receiving Props](#42)
-
-#### 43. [Props, Immutability, and One-Way Data Flow](#43)
-
-#### 44. [CHALLENGE #1: Profile Card (v1)](#44)
-
-#### 45. [The Rules of JSX](#45)
-
-#### 46. [Rendering Lists](#46)
-
-#### 47. [Conditional Rendering With &&](#47)
-
-#### 48. [Conditional Rendering With Ternaries](#48)
-
-#### 49. [Conditional Rendering With Multiple Returns](#49)
-
-#### 50. [Extracting JSX Into a New Component](#50)
-
-#### 51. [Destructuring Props](#51)
-
-#### 52. [React Fragments](#52)
-
-#### 53. [Setting Classes and Text Conditionally](#53)
-
-#### 54. [Section Summary](#54)
-
-#### 55. [CHALLENGE #2: Profile Card (v2)](#55)
-
----
+| Index                                                   |                                                        |
+| ------------------------------------------------------- | ------------------------------------------------------ |
+| 32. [Section Overview](#32)                             | 44. [CHALLENGE #1: Profile Card (v1)](#44)             |
+| 33. [Rendering the Root Component and Strict Mode](#33) | 45. [The Rules of JSX](#45)                            |
+| 34. [Before We Start Coding: Debugging](#34)            | 46. [Rendering Lists](#46)                             |
+| 35. [Components as Building Blocks](#35)                | 47. [Conditional Rendering With &&](#47)               |
+| 36. [Creating And Reusing a Component](#36)             | 48. [Conditional Rendering With Ternaries](#48)        |
+| 37. [What is JSX?](#37)                                 | 49. [Conditional Rendering With Multiple Returns](#49) |
+| 38. [Creating More Components](#38)                     | 50. [Extracting JSX Into a New Component](#50)         |
+| 39. [JavaScript Logic in Components](#39)               | 51. [Destructuring Props](#51)                         |
+| 40. [Separation of Concerns](#40)                       | 52. [React Fragments](#52)                             |
+| 41. [Styling React Applications](#41)                   | 53. [Setting Classes and Text Conditionally](#53)      |
+| 42. [Passing and Receiving Props](#42)                  | 54. [Section Summary](#54)                             |
+| 43. [Props, Immutability, and One-Way Data Flow](#43)   | 55. [CHALLENGE #2: Profile Card (v2)](#55)             |
 
 <br>
 
