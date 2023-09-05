@@ -551,11 +551,10 @@ root.render(
 
 ### 42. Passing and Receiving Props<a id='42'></a>
 
-- pass data from parent component to child component
+- pass data from parent(Menu) component to child(Pizza) component
 - In src/index.js,
-  - pass data from Pizza component, which is in Menu component
-  - change Pizza component to receive props and setup props
-  -
+  - pass data from Pizza component, which is nested in Menu component
+  - modity Pizza component JSX to receive props
 
 ```js
 import React from "react";
@@ -650,7 +649,7 @@ function Menu() {
 }
 
 function Pizza(props) {
-  console.log(pizzaObj);
+  console.log(props);
   return (
     <div className="pizza">
       <img src={props.photoName} alt={props.name} />
@@ -675,7 +674,7 @@ function Footer() {
 
   return (
     <footer className="footer">
-      {new Date().toLocaleTimeString}. We/re currently open
+      {new Date().toLocaleTimeString()}. We/re currently open
     </footer>
   );
 
