@@ -627,6 +627,7 @@ function Header() {
   );
 }
 
+// 1️⃣
 function Menu() {
   return (
     <main className="menu">
@@ -648,6 +649,7 @@ function Menu() {
   );
 }
 
+// 2️⃣
 function Pizza(props) {
   console.log(props);
   return (
@@ -847,7 +849,8 @@ h1 {
 
 ### 46. Rendering Lists<a id='46'></a>
 
-- In src/index.js, render pizza list by passing props from parent to child component
+- In src/index.js, render pizza list by passing "pizzaData" entire object as props from parent to child component
+- refactor Pizza component to access value from pizzaObj
 
 ```js
 import React from "react";
@@ -925,8 +928,9 @@ function Menu() {
     <main className="menu">
       <h2>Our menu</h2>
 
+      {/* 1️⃣ */}
       <ul className="pizzas">
-        {pizzas.map((pizza) => (
+        {pizzaData.map((pizza) => (
           <Pizza pizzaObj={pizza} key={pizza.name} />
         ))}
       </ul>
@@ -935,15 +939,16 @@ function Menu() {
 }
 
 function Pizza(props) {
-  console.log(pizzaObj);
+  console.log(props);
 
+  // 2️⃣
   return (
     <li className="pizza">
-      <img src={pizzaObj.photoName} alt={pizzaObj.name} />
+      <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
       <div>
-        <h3>{pizzaObj.name}</h3>
-        <p>{pizzaObj.ingredients}</p>
-        <span>{pizzaObj.price}</span>
+        <h3>{props.pizzaObj.name}</h3>
+        <p>{props.pizzaObj.ingredients}</p>
+        <span>{props.pizzaObj.price}</span>
       </div>
     </li>
   );
@@ -961,7 +966,7 @@ function Footer() {
 
   return (
     <footer className="footer">
-      {new Date().toLocaleTimeString}. We/re currently open
+      {new Date().toLocaleTimeString()}. We/re currently open
     </footer>
   );
 
@@ -980,11 +985,13 @@ root.render(
 // ReactDOM.render(<App />, document.getElementById("root"));
 ```
 
-- <br>
+-
+
+<br>
 
 ### 47. Conditional Rendering With &&<a id='47'></a>
 
-- In src/index.js
+- In src/index.js, try short circuit && to render in Menu, Footer component
 
 ```js
 import React from "react";
@@ -1065,7 +1072,7 @@ function Menu() {
   return (
     <main className="menu">
       <h2>Our menu</h2>
-
+      {/* 1️⃣ */}
       {numPizzas > 0 && (
         <ul className="pizzas">
           {pizzas.map((pizza) => (
@@ -1078,15 +1085,15 @@ function Menu() {
 }
 
 function Pizza(props) {
-  console.log(pizzaObj);
+  console.log(props);
 
   return (
     <li className="pizza">
-      <img src={pizzaObj.photoName} alt={pizzaObj.name} />
+      <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
       <div>
-        <h3>{pizzaObj.name}</h3>
-        <p>{pizzaObj.ingredients}</p>
-        <span>{pizzaObj.price}</span>
+        <h3>{props.pizzaObj.name}</h3>
+        <p>{props.pizzaObj.ingredients}</p>
+        <span>{props.pizzaObj.price}</span>
       </div>
     </li>
   );
@@ -1104,6 +1111,7 @@ function Footer() {
 
   return (
     <footer className="footer">
+      {/* 2️⃣ */}
       {isOpen && (
         <div className="order">
           <p>We're happy to welcome you between {closeHour}:00.</p>
