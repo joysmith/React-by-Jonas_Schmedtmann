@@ -416,13 +416,14 @@ root.render(
 ### 41. Styling React Applications<a id='41'></a>
 
 - In src/index.js
-  - import index.css
-  - try js-obj inline style pn footer component
-  - apply global styles using external style sheet
+  - 1️⃣ import index.css
+  - 2️⃣ try inline style in Header component, use json object notation
+  - 3️⃣ apply global styles using external style sheet, in all component
 
 ```js
 import React from "react";
 import ReactDOM from "react-dom/client";
+// 1️⃣
 import "./index.css";
 
 const pizzaData = [
@@ -481,9 +482,11 @@ function App() {
 }
 
 function Header() {
+  // 2️⃣
   // const style = { color: "red", fontSize: "48px", textTransform: "uppercase" };
   const style = {};
 
+  // 3️⃣
   return (
     <header className="header">
       <h1 style={style}>Fast React Pizza Co.</h1>
@@ -492,6 +495,7 @@ function Header() {
 }
 
 function Menu() {
+  // 3️⃣
   return (
     <main className="menu">
       <h2>Our menu</h2>
@@ -505,7 +509,7 @@ function Menu() {
 function Pizza() {
   return (
     <div>
-      <img src="pizzas/prosciutto" alt="pizza prosciutto" />
+      <img src="pizzas/prosciutto.jpg" alt="pizza prosciutto" />
       <h3>Pizza Prosciutto</h3>
       <p>Tomato, mozarella, ham, aragula, and burrata cheese</p>
     </div>
@@ -521,10 +525,10 @@ function Footer() {
 
   // if (hour >= openHour && hour <= closeHour) alert("We're currently open!");
   // else alert("Sorry we're closed");
-
+  // 3️⃣
   return (
     <footer className="footer">
-      {new Date().toLocaleTimeString}. We/re currently open
+      {new Date().toLocaleTimeString()}. We/re currently open
     </footer>
   );
 
