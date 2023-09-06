@@ -2073,7 +2073,7 @@ function Pizza({ pizzaObj }) {
   console.log(pizzaObj);
 
   // if (pizzaObj.soldOut) return null;
-
+  // 1️⃣
   return (
     <li className={`pizza ${pizzaObj.soldOut ? "sold-out" : ""}`}>
       <img src={pizzaObj.photoName} alt={pizzaObj.name} />
