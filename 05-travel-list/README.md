@@ -59,6 +59,7 @@
 > Layout
 
 <img src="notes/faraway.png" width="400">
+<img src="notes/faraway.png" width="400">
 
 <br>
 
