@@ -110,6 +110,11 @@ input {
   align-content: start;
 }
 
+/* remove scrollbar */
+.list ul::-webkit-scrollbar {
+  display: none;
+}
+
 .list li {
   display: flex;
   align-items: center;
