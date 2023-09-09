@@ -3751,25 +3751,598 @@ function WatchedMovie({ movie }) {
 
 ### 115. Building a Reusable Star Rating Component<a id="115"></a>
 
+- In src folder create StarRating.js component
+
+```js
+export default function StarRating() {
+  return <div>Hello</div>;
+}
+```
+
+- In src/index.js, temporarly disable import index.css, App, and App component
+  - import StarRating component and use it
+
+```js
+import React from "react";
+import ReactDOM from "react-dom/client";
+// 1️⃣
+// import "./index.css";
+// import App from "./App";
+
+// 3️⃣
+import StarRating from "./StarRating";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+  <React.StrictMode>
+    {/* 2️⃣ <App /> */}
+
+    {/* 4️⃣ instance */}
+    <StarRating />
+  </React.StrictMode>
+);
+```
+
+---
+
+- In src/index,js
+
+```js
+import React from "react";
+import ReactDOM from "react-dom/client";
+// import "./index.css";
+// import App from "./App";
+
+import StarRating from "./StarRating";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+  <React.StrictMode>
+    {/* <App /> */}
+
+    {/* 1️⃣ Star rating */}
+    <StarRating maxRating={5} />
+    <StarRating maxRating={10} />
+    <StarRating />
+  </React.StrictMode>
+);
+```
+
+---
+
+- In src/StarRating.js
+
+```js
+// 5️⃣
+const containerStyle = {
+  // set flex box
+  display: "flex",
+  // alin item vertical
+  alignItems: "center",
+  gap: "16px",
+};
+
+// 6️⃣
+const starContainerStyle = {
+  // set flex box, defaul align item horizontal
+  display: "flex",
+  gap: "4px",
+};
+
+//  7️⃣
+const textStyle = {
+  lineHeight: "1",
+  margin: "0",
+};
+
+
+// 1️⃣destructure and passing default value in case of missing props
+export default function StarRating({ maxRating = 5 }) {
+  return (
+        {/* 2️⃣ container to hold star, paragraph */}
+    <div style={containerStyle}>
+        {/* 3️⃣ star container */}
+      <div style={starContainerStyle}>
+        {Array.from({ length: maxRating }, (_, i) => (
+          <span>S{i + 1}</span>
+        ))}
+      </div>
+          {/* 4️⃣ number of star  */}
+      <p style={textStyle}>10</p>
+    </div>
+  );
+}
+
+```
+
 <br>
 
 ### 116. Creating the Stars<a id="116"></a>
+
+- In src/index.js, remove two StarRating instance
+
+```js
+import React from "react";
+import ReactDOM from "react-dom/client";
+// import "./index.css";
+// import App from "./App";
+
+import StarRating from "./StarRating";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+  <React.StrictMode>
+    {/* <App /> */}
+    <StarRating maxRating={5} />
+  </React.StrictMode>
+);
+```
+
+---
+
+- In src/App.js
+
+```js
+import { useState } from "react";
+
+const containerStyle = {
+  display: "flex",
+  alignItems: "center",
+  gap: "16px",
+};
+
+const starContainerStyle = {
+  display: "flex",
+  gap: "4px",
+};
+
+const textStyle = {
+  lineHeight: "1",
+  margin: "0",
+};
+
+export default function StarRating({ maxRating = 5 }) {
+  const [rating, setRating] = useState(1);
+
+  function handleRating(rating) {
+    setRating(rating);
+  }
+
+  return (
+    <div style={containerStyle}>
+      <div style={starContainerStyle}>
+        {Array.from({ length: maxRating }, (_, i) => (
+          <Star
+            key={i}
+            onRate={() => handleRating(i + 1)}
+            full={rating >= i + 1}
+          />
+        ))}
+      </div>
+      <p style={textStyle}>{rating || ""}</p>
+    </div>
+  );
+}
+
+const starStyle = {
+  width: "48px",
+  height: "48px",
+  display: "block",
+  cursor: "pointer",
+};
+
+function Star({ onRate, full }) {
+  return (
+    <span role="button" style={starStyle} onClick={onRate}>
+      {full ? (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="#000"
+          stroke="#000"
+        >
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+        </svg>
+      ) : (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="#000"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="{2}"
+            d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
+          />
+        </svg>
+      )}
+    </span>
+  );
+}
+```
 
 <br>
 
 ### 117. Handling Hover Events<a id="117"></a>
 
+- In src/index.js
+
+```js
+import { useState } from "react";
+
+const containerStyle = {
+  display: "flex",
+  alignItems: "center",
+  gap: "16px",
+};
+
+const starContainerStyle = {
+  display: "flex",
+  gap: "4px",
+};
+
+const textStyle = {
+  lineHeight: "1",
+  margin: "0",
+};
+
+export default function StarRating({ maxRating = 5 }) {
+  const [rating, setRating] = useState(1);
+  const [tempRating, setTempRating] = useState(0);
+
+  function handleRating(rating) {
+    setRating(rating);
+  }
+
+  return (
+    <div style={containerStyle}>
+      <div style={starContainerStyle}>
+        {Array.from({ length: maxRating }, (_, i) => (
+          <Star
+            key={i}
+            onRate={() => handleRating(i + 1)}
+            full={tempRating ? tempRating >= i + 1 : rating >= i + 1}
+            onHoverIn={() => setTempRating(i + 1)}
+            onHoverOut={() => setTempRating(0)}
+          />
+        ))}
+      </div>
+      <p style={textStyle}>{tempRating || rating || ""}</p>
+    </div>
+  );
+}
+
+const starStyle = {
+  width: "48px",
+  height: "48px",
+  display: "block",
+  cursor: "pointer",
+};
+
+function Star({ onRate, full, onHoverIn, onHoverOut }) {
+  return (
+    <span
+      role="button"
+      style={starStyle}
+      onClick={onRate}
+      onMouseEnter={onHoverIn}
+      onMouseLeave={onHoverOut}
+    >
+      {full ? (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="#000"
+          stroke="#000"
+        >
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+        </svg>
+      ) : (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="#000"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="{2}"
+            d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
+          />
+        </svg>
+      )}
+    </span>
+  );
+}
+```
+
 <br>
 
 ### 118. Props as a Component API<a id="118"></a>
+
+- ref. slides
 
 <br>
 
 ### 119. Improving Reusability With Props<a id="119"></a>
 
+- In src/index.js
+
+```js
+import React, { useState } from "react";
+import ReactDOM from "react-dom/client";
+// import "./index.css";
+// import App from "./App";
+
+import StarRating from "./StarRating";
+
+// 1️⃣ How to use component from consumer mindset
+function Test() {
+  const [movieRating, setMovieRating] = useState(0);
+
+  return (
+    <div>
+      <StarRating color="blue" maxRating={10} onSetRating={setMovieRating} />
+      <p>This movie was rated {movieRating} stars</p>
+    </div>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+  <React.StrictMode>
+    {/* <App /> */}
+    <StarRating
+      maxRating={5}
+      messages={["Terrible", "Bad", "Okay", "Good", "Amazing"]}
+    />
+    <StarRating size={25} color="red" className="test" defaultRating={3} />
+
+    {/* 2️⃣*/}
+    <Test />
+  </React.StrictMode>
+);
+```
+
+---
+
+- In src/App.js, write component from creator mindset
+
+```js
+import { useState } from "react";
+
+const containerStyle = {
+  display: "flex",
+  alignItems: "center",
+  gap: "16px",
+};
+
+const starContainerStyle = {
+  display: "flex",
+  gap: "4px",
+};
+
+export default function StarRating({
+  maxRating = 5,
+  color = "#fcc419",
+  size = 48,
+  className = "",
+  messages = [],
+  defaultRating = 0,
+  onSetRating,
+}) {
+  const [rating, setRating] = useState(defaultRating);
+  const [tempRating, setTempRating] = useState(0);
+
+  function handleRating(rating) {
+    setRating(rating);
+    onSetRating(rating);
+  }
+
+  const textStyle = {
+    lineHeight: "1",
+    margin: "0",
+    color,
+    fontSize: `${size / 1.5}px`,
+  };
+
+  return (
+    <div style={containerStyle} className={className}>
+      <div style={starContainerStyle}>
+        {Array.from({ length: maxRating }, (_, i) => (
+          <Star
+            key={i}
+            onRate={() => handleRating(i + 1)}
+            full={tempRating ? tempRating >= i + 1 : rating >= i + 1}
+            onHoverIn={() => setTempRating(i + 1)}
+            onHoverOut={() => setTempRating(0)}
+            color={color}
+            size={size}
+          />
+        ))}
+      </div>
+      <p style={textStyle}>
+        {messages.length === maxRating
+          ? messages[tempRating ? tempRating - 1 : rating - 1]
+          : tempRating || rating || ""}
+      </p>
+    </div>
+  );
+}
+
+function Star({ onRate, full, onHoverIn, onHoverOut, color, size }) {
+  const starStyle = {
+    width: `${size}px`,
+    height: `${size}px`,
+    display: "block",
+    cursor: "pointer",
+  };
+
+  return (
+    <span
+      role="button"
+      style={starStyle}
+      onClick={onRate}
+      onMouseEnter={onHoverIn}
+      onMouseLeave={onHoverOut}
+    >
+      {full ? (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill={color}
+          stroke={color}
+        >
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+        </svg>
+      ) : (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke={color}
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="{2}"
+            d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
+          />
+        </svg>
+      )}
+    </span>
+  );
+}
+```
+
 <br>
 
 ### 120. PropTypes<a id="120"></a>
+
+- In src/App.js
+
+```js
+import { useState } from "react";
+// import proptype inbuilt -no longer used, instead typescript
+import PropTypes from "prop-types";
+
+const containerStyle = {
+  display: "flex",
+  alignItems: "center",
+  gap: "16px",
+};
+
+const starContainerStyle = {
+  display: "flex",
+  gap: "4px",
+};
+
+// How to set type of data as validator
+StarRating.propTypes = {
+  maxRating: PropTypes.number,
+  defaultRating: PropTypes.number,
+  color: PropTypes.string,
+  size: PropTypes.number,
+  messages: PropTypes.array,
+  className: PropTypes.string,
+  onSetRating: PropTypes.func,
+};
+
+export default function StarRating({
+  maxRating = 5,
+  color = "#fcc419",
+  size = 48,
+  className = "",
+  messages = [],
+  defaultRating = 0,
+  onSetRating,
+}) {
+  const [rating, setRating] = useState(defaultRating);
+  const [tempRating, setTempRating] = useState(0);
+
+  function handleRating(rating) {
+    setRating(rating);
+    onSetRating(rating);
+  }
+
+  const textStyle = {
+    lineHeight: "1",
+    margin: "0",
+    color,
+    fontSize: `${size / 1.5}px`,
+  };
+
+  return (
+    <div style={containerStyle} className={className}>
+      <div style={starContainerStyle}>
+        {Array.from({ length: maxRating }, (_, i) => (
+          <Star
+            key={i}
+            onRate={() => handleRating(i + 1)}
+            full={tempRating ? tempRating >= i + 1 : rating >= i + 1}
+            onHoverIn={() => setTempRating(i + 1)}
+            onHoverOut={() => setTempRating(0)}
+            color={color}
+            size={size}
+          />
+        ))}
+      </div>
+      <p style={textStyle}>
+        {messages.length === maxRating
+          ? messages[tempRating ? tempRating - 1 : rating - 1]
+          : tempRating || rating || ""}
+      </p>
+    </div>
+  );
+}
+
+function Star({ onRate, full, onHoverIn, onHoverOut, color, size }) {
+  const starStyle = {
+    width: `${size}px`,
+    height: `${size}px`,
+    display: "block",
+    cursor: "pointer",
+  };
+
+  return (
+    <span
+      role="button"
+      style={starStyle}
+      onClick={onRate}
+      onMouseEnter={onHoverIn}
+      onMouseLeave={onHoverOut}
+    >
+      {full ? (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill={color}
+          stroke={color}
+        >
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+        </svg>
+      ) : (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke={color}
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="{2}"
+            d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
+          />
+        </svg>
+      )}
+    </span>
+  );
+}
+```
 
 <br>
 
